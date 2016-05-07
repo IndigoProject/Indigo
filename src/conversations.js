@@ -20,6 +20,10 @@ function getResponse(input) {
         throw new Error("Conversation data is empty, are you sure you initialized the engine?");
     }
 
+    if(strUtils.clean(input).length < 1) {
+        return fallback[Math.floor(Math.random() * fallback.length)];
+    }
+
     var tops = [];
 
     //loop through all the cached conversations
@@ -59,6 +63,7 @@ function getResponse(input) {
         tops.push(top);
     }
 
+    //return "```" + util.inspect(tops) + "```";
     //pre define the object for the final match
     var final = {
         rank: 0,
@@ -73,6 +78,8 @@ function getResponse(input) {
             final = t;
         }
     }
+
+    //return "```" + util.inspect(final) + "```";
 
     //get the next expected response
     if(conversations[final.conversation_id].indexOf(final.content) > -1) {

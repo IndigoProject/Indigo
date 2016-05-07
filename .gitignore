@@ -1,1 +1,3 @@
 corpus/conversations.json
+node_modules
+tests/temp
